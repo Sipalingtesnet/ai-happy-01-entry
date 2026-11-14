@@ -9,6 +9,7 @@ import os
 import sys
 import hashlib
 import shutil
+from pathlib import Path
 
 def hash_file(path):
     h = hashlib.sha256()
@@ -19,9 +20,9 @@ def hash_file(path):
 
 def main():
     output_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
-    source_path = "entry.png"
+    source_path = Path(__file__).resolve().parent / 'entry.png'
 
-    if not os.path.exists(source_path):
+    if not source_path.exists():
         print(f"Error: Critical source image '{source_path}' does not exist.", file=sys.stderr)
         sys.exit(1)
 
